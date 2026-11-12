@@ -357,3 +357,4 @@ Durante el diseño y prueba del entorno contenerizado se analizaron las siguient
 1. **Reproducibilidad Garantizada:** La contenerización con Docker y Docker Compose elimina por completo el clásico problema "en mi máquina funciona", permitiendo que cualquier desarrollador clone el proyecto y lo ejecute con un solo comando.
 2. **Seguridad y Desacoplamiento:** La separación de credenciales mediante `.env.example` y la ejecución del contenedor de la aplicación con un usuario no root (`USER node`) refuerzan las buenas prácticas de desarrollo en la nube (Twelve-Factor App).
 3. **Observabilidad y Resiliencia:** La inclusión del endpoint `/health` y los healthchecks de Docker proporcionan visibilidad en tiempo real del estado de los servicios y facilitan la integración futura con orquestadores como Kubernetes o servicios de nube administrados (AWS ECS, Google Cloud Run).
+

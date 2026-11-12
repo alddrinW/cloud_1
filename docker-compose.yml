@@ -1,10 +1,5 @@
-# ==============================================================
-# DOCKER COMPOSE - ORQUESTACIÓN MULTI-CONTENEDOR
-# Servicios: API (Node.js/Express) + Base de Datos (PostgreSQL)
-# ==============================================================
-
 services:
-  # Servicio de Base de Datos Relacional (PostgreSQL)
+  # Servicio de PostgreSQL
   db:
     image: postgres:16-alpine
     container_name: app_db
@@ -59,3 +54,4 @@ volumes:
 networks:
   app_network:
     driver: bridge
+

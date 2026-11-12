@@ -1,8 +1,3 @@
-# ==============================================================
-# DOCKERFILE - API REST CONTENERIZADA
-# Programación en la Nube
-# ==============================================================
-
 # Imagen base ligera de Node.js basada en Alpine Linux
 FROM node:20-alpine AS base
 
@@ -35,3 +30,4 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 
 # Comando de inicio del servicio
 CMD ["node", "src/index.js"]
+

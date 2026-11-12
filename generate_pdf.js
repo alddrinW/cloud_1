@@ -204,3 +204,4 @@ try {
 } catch (e) {
   console.error('Error generando PDF:', e.message);
 }
+

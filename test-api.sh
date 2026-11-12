@@ -92,3 +92,4 @@ echo -e "\n"
 echo -e "${GREEN}==============================================================${NC}"
 echo -e "${GREEN}   TODAS LAS PRUEBAS COMPLETADAS SATISFACTORIAMENTE          ${NC}"
 echo -e "${GREEN}==============================================================${NC}"
+

@@ -21,3 +21,4 @@ INSERT INTO items (name, description, price, status) VALUES
     ('Mouse Inalámbrico', 'Mouse ergonómico Bluetooth con sensor de 4000 DPI', 34.50, 'available'),
     ('Teclado Mecánico RGB', 'Teclado compacto 75% con switches mecánicos táctiles', 79.90, 'available')
 ON CONFLICT DO NOTHING;
+
