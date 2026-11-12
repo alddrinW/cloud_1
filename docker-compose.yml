@@ -1,0 +1,61 @@
+# ==============================================================
+# DOCKER COMPOSE - ORQUESTACIÓN MULTI-CONTENEDOR
+# Servicios: API (Node.js/Express) + Base de Datos (PostgreSQL)
+# ==============================================================
+
+services:
+  # Servicio de Base de Datos Relacional (PostgreSQL)
+  db:
+    image: postgres:16-alpine
+    container_name: app_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-cloud_db}
+      POSTGRES_USER: ${DB_USER:-cloud_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-cloud_secure_password_example}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-cloud_user} -d ${DB_NAME:-cloud_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    networks:
+      - app_network
+
+  # Servicio de la Aplicación API REST
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app_api
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - PORT=3000
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME:-cloud_db}
+      - DB_USER=${DB_USER:-cloud_user}
+      - DB_PASSWORD=${DB_PASSWORD:-cloud_secure_password_example}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app_network
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  app_network:
+    driver: bridge
